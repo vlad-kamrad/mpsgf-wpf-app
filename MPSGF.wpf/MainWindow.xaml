@@ -1,0 +1,75 @@
+﻿<Window x:Class="MPSGF.wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MPSGF.wpf"
+        xmlns:model="clr-namespace:MPSGF.wpf.Model"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+        mc:Ignorable="d"
+        Title="Main Window" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary Source="Resources\PersonTemplates.xaml" />
+    </Window.Resources>
+
+    <Grid>
+        
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Top" Margin="0,0,-0.4,0">
+            <TabItem Header="Data Template Example">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <ComboBox ItemsSource="{Binding Users}" SelectedValue="{Binding SelectedUser}" DisplayMemberPath="Name" Grid.Row="0" VerticalAlignment="Center" FontSize="20" />
+                    <ContentControl Grid.Row="1" Content="{Binding SelectedUser}" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Sorting">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.13*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListBox Grid.Column="0" x:Name="listBox1" ItemsSource="{Binding Users}" HorizontalAlignment="Stretch" Margin="13" VerticalAlignment="Stretch" />
+
+                    <Button Content="Ascending" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0.4,13,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+                    <Button Content="Descending" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0.4,37,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+                    <CheckBox x:Name="isCustomSort" Content="Custom" Grid.Column="1" HorizontalAlignment="Left" Margin="8.4,61,0,0" VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Grouping">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="listBox2" ItemsSource="{Binding Users}" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" >
+                        <ListBox.GroupStyle>
+                            <GroupStyle />
+                        </ListBox.GroupStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Filtering">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.25*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListBox x:Name="listBox3" ItemsSource="{Binding Users}" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Stretch" />
+
+                    <RadioButton GroupName="Filter" Content="All" Grid.Column="1" HorizontalAlignment="Left" Margin="0,30,124,0" VerticalAlignment="Top" Checked="RadioButtonChange" IsChecked="True" />
+                    <RadioButton GroupName="Filter" Content="Only Male" Grid.Column="1" HorizontalAlignment="Left" Margin="0.6,50,0,0" VerticalAlignment="Top" Checked="RadioButtonChange" />
+                    <RadioButton GroupName="Filter" Content="Only Female" Grid.Column="1" HorizontalAlignment="Left" Margin="0.6,70,0,0" VerticalAlignment="Top" Checked="RadioButtonChange" />
+                    <RadioButton GroupName="Filter" Content="Only Managers" Grid.Column="1" HorizontalAlignment="Left" Margin="0.6,90,0,0" VerticalAlignment="Top" Checked="RadioButtonChange" />
+                    <RadioButton GroupName="Filter" Content="Only Workers" Grid.Column="1" HorizontalAlignment="Left" Margin="0.6,110,0,0" VerticalAlignment="Top" Checked="RadioButtonChange" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
